@@ -1,4 +1,4 @@
-from commons.repositories import BaseRepository
+from apps.commons.repositories import BaseRepository
 
 class CommonMongoRepo(BaseRepository):
 

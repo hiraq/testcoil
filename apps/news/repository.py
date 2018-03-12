@@ -1,4 +1,4 @@
-from commons.repositories import CommonMongoRepo
+from apps.commons.repositories import CommonMongoRepo
 
-class NewsRepo(CommonRepo):
+class NewsRepo(CommonMongoRepo):
     pass

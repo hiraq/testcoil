@@ -7,5 +7,7 @@ class News(BaseModel):
     tags = ListField(StringField())
 
     meta = {
-        'indexes': ['$title', '#title', '$content']
+        'indexes': [{
+            'fields': ['$title', '$content']
+        }]
     }
