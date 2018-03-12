@@ -5,6 +5,7 @@ from core.extentions.exceptions import blueprint as ext_exceptions
 from core.extentions.middlewares import blueprint as ext_middlewares
 
 from apps.ping import blueprint as ping_app
+from apps.news import blueprint as news_app
 
 from settings import Settings
 
@@ -27,6 +28,7 @@ app.blueprint(ext_middlewares)
 
 # Install apps
 app.blueprint(ping_app, url_prefix='/ping')
+app.blueprint(news_app, url_prefix='/v1/news')
 
 # Running sanic, we need to make sure directly run by interpreter
 # ref: http://sanic.readthedocs.io/en/latest/sanic/deploying.html#running-via-command
