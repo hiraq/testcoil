@@ -2,3 +2,4 @@ sanic
 python-dotenv
 aiohttp
 Fabric3
+mongoengine
