@@ -1,5 +1,5 @@
 import argparse
-from mongoengine import connect
+from mongoengine import connect as mongo_conn
 from sanic import Sanic
 
 from core.extentions.exceptions import blueprint as ext_exceptions
@@ -40,7 +40,7 @@ app.blueprint(news_app, url_prefix='/v1/news')
 # ref: http://sanic.readthedocs.io/en/latest/sanic/deploying.html#running-via-command
 if __name__ == '__main__':
     # connect to mongodb
-    connect(host=app.config.get('MONGO_HOST'))
+    mongo_conn(host=app.config.get('MONGO_HOST'))
 
     app.run(
         host=args.host, 
