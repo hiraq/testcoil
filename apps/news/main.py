@@ -8,3 +8,4 @@ from apps.news import handlers
 
 blueprint = Blueprint('news_app')
 blueprint.add_route(handlers.create, '/', methods=['POST'])
+blueprint.add_route(handlers.delete, '/remove/<id>', methods=['DELETE'])

@@ -5,3 +5,6 @@ class BaseException(Exception):
 
 class DataDuplicateError(BaseException):
     pass
+
+class DataNotFoundError(BaseException):
+    pass

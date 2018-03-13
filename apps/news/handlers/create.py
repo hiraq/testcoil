@@ -1,6 +1,4 @@
 from http import HTTPStatus
-from pymongo.errors import OperationFailure
-
 from sanic.response import json
 
 from core.helpers import jsonapi
