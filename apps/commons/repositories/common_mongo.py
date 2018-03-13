@@ -1,3 +1,4 @@
+from bson.objectid import ObjectId
 from apps.commons.repositories import BaseRepository
 
 class CommonMongoRepo(BaseRepository):
@@ -17,7 +18,7 @@ class CommonMongoRepo(BaseRepository):
         doc.delete()
 
     def findById(self, id):
-        doc = self._model.objects(id=id)
+        doc = self._model.objects.get(id=ObjectId(id))
         return doc
 
     def findBy(self, **kwargs):
