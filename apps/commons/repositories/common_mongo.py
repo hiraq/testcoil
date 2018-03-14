@@ -25,3 +25,5 @@ class CommonMongoRepo(BaseRepository):
         doc = self._model.objects(**kwargs)
         return doc
 
+    def getAll(self):
+        return self._model.objects.all()
