@@ -1,6 +1,7 @@
 from http import HTTPStatus
 
 from mongoengine.errors import OperationError
+from mongoengine.connection import MongoEngineConnectionError
 from pymongo.errors import ServerSelectionTimeoutError, OperationFailure
 
 from sanic import Blueprint
@@ -23,6 +24,11 @@ def handle_mongo_failure(request, exception):
 @blueprint.exception(OperationError)
 def handle_mongo_op(request, exception):
     error = jsonapi.format_error(title='Error database operations', detail=str(exception))
+    return json(jsonapi.return_an_error(error), status=HTTPStatus.INTERNAL_SERVER_ERROR) 
+
+@blueprint.exception(MongoEngineConnectionError)
+def handle_mongo_engine_conn(request, exception):
+    error = jsonapi.format_error(title='Error mongo connection', detail=str(exception))
     return json(jsonapi.return_an_error(error), status=HTTPStatus.INTERNAL_SERVER_ERROR) 
 
 

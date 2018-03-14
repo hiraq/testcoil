@@ -3,7 +3,11 @@ from sanic import Sanic
 from core.extentions.exceptions import blueprint as ext_exceptions
 from core.extentions.middlewares import blueprint as ext_middlewares
 
+from mongoengine import connect as mongo_conn
+from apps.commons.exceptions import blueprint as common_exceptions
+
 from apps.ping import blueprint as ping_app
+from apps.news import blueprint as news_app
 
 def build_full_app(settings={}):
     """Build Sanic Full App
@@ -26,6 +30,10 @@ def build_full_app(settings={}):
 
     app.blueprint(ext_exceptions)
     app.blueprint(ext_middlewares)
-    app.blueprint(ping_app, url_prefix='/ping')
+    app.blueprint(common_exceptions)
 
+    app.blueprint(ping_app, url_prefix='/ping')
+    app.blueprint(news_app, url_prefix='/v1/news')
+
+    mongo_conn(host=app.config.get('MONGO_HOST'))
     return app
