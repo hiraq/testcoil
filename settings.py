@@ -9,4 +9,4 @@ class Settings(object):
         dotenv.load_dotenv(envpath)
 
         self.SECRET_KEY = environ.get('SECRET_KEY')
-
+        self.MONGO_HOST = environ.get('MONGO_HOST')
