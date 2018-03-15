@@ -9,6 +9,7 @@ from apps.commons.exceptions import blueprint as common_exceptions
 
 from apps.ping import blueprint as ping_app
 from apps.news import blueprint as news_app
+from apps.topics import blueprint as topic_app
 
 from settings import Settings
 
@@ -35,6 +36,7 @@ app.blueprint(common_exceptions)
 # Install apps
 app.blueprint(ping_app, url_prefix='/ping')
 app.blueprint(news_app, url_prefix='/v1/news')
+app.blueprint(topic_app, url_prefix='/v1/topics')
 
 # Running sanic, we need to make sure directly run by interpreter
 # ref: http://sanic.readthedocs.io/en/latest/sanic/deploying.html#running-via-command

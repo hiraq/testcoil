@@ -3,31 +3,25 @@ from sanic.response import json
 
 from core.helpers import jsonapi
 from apps.commons.errors import DataDuplicateError
-from apps.news.models import News
-from apps.news.repository import NewsRepo
-from apps.news.services import CreateService
-
 from apps.topics.models import Topic
 from apps.topics.repository import TopicRepo
+from apps.topics.services import CreateService
 
 async def create(request):
     response = {}
     status = HTTPStatus.CREATED
 
-    repo = NewsRepo(News)
-    topicRepo = TopicRepo(Topic)
-    service = CreateService(request.json, repo, topicRepo)
+    repo = TopicRepo(Topic)
+    service = CreateService(request.json, repo)
 
     try:
-        news = service.call()
+        doc = service.call()
         response = {
             'data': {
-                'id': str(news.id),
-                'type': 'news',
+                'id': str(doc.id),
+                'type': 'topic',
                 'attributes': {
-                    'title': news.title,
-                    'content': news.content,
-                    'topics': list(map(lambda topic: topic.name, news.topics))
+                    'name': doc.name,
                 }
             }
         }

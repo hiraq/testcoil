@@ -8,6 +8,7 @@ from apps.commons.exceptions import blueprint as common_exceptions
 
 from apps.ping import blueprint as ping_app
 from apps.news import blueprint as news_app
+from apps.topics import blueprint as topic_app
 
 def build_full_app(settings={}):
     """Build Sanic Full App
@@ -34,6 +35,7 @@ def build_full_app(settings={}):
 
     app.blueprint(ping_app, url_prefix='/ping')
     app.blueprint(news_app, url_prefix='/v1/news')
+    app.blueprint(topic_app, url_prefix='/v1/topics')
 
     mongo_conn(host=app.config.get('MONGO_HOST'))
     return app

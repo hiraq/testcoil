@@ -1,32 +1,30 @@
+import datetime
 from http import HTTPStatus
 from sanic.response import json
 
 from core.helpers import jsonapi
 from apps.commons.errors import DataNotFoundError
 
-from apps.news.models import News
-from apps.news.repository import NewsRepo
-from apps.news.services import ReadService 
+from apps.topics.models import Topic
+from apps.topics.repository import TopicRepo
+from apps.topics.services import UpdateService 
 
-async def read(request, id):
+async def update(request, id):
     response = {}
     status = HTTPStatus.OK
 
-    repo = NewsRepo(News)
-    service = ReadService(id, repo)
+    repo = TopicRepo(Topic)
+    service = UpdateService(id, request.json, repo)
 
     try:
         doc = service.call()
         response = {
             'data': {
                 'id': str(doc.id),
-                'type': 'news',
+                'type': 'topic',
                 'attributes': {
-                    'title': doc.title,
-                    'content': doc.content,
-                    'topics': list(map(lambda topic: topic.name, doc.topics)),
-                    'created_at': str(doc.created_at),
-                    'updated_at': str(doc.updated_at)
+                    'name': doc.name,
+                    'updated_at': str(doc.updated_at) 
                 }
             }
         }

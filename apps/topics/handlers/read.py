@@ -4,15 +4,15 @@ from sanic.response import json
 from core.helpers import jsonapi
 from apps.commons.errors import DataNotFoundError
 
-from apps.news.models import News
-from apps.news.repository import NewsRepo
-from apps.news.services import ReadService 
+from apps.topics.models import Topic
+from apps.topics.repository import TopicRepo
+from apps.topics.services import ReadService 
 
 async def read(request, id):
     response = {}
     status = HTTPStatus.OK
 
-    repo = NewsRepo(News)
+    repo = TopicRepo(Topic)
     service = ReadService(id, repo)
 
     try:
@@ -20,11 +20,9 @@ async def read(request, id):
         response = {
             'data': {
                 'id': str(doc.id),
-                'type': 'news',
+                'type': 'topic',
                 'attributes': {
-                    'title': doc.title,
-                    'content': doc.content,
-                    'topics': list(map(lambda topic: topic.name, doc.topics)),
+                    'name': doc.name,
                     'created_at': str(doc.created_at),
                     'updated_at': str(doc.updated_at)
                 }
