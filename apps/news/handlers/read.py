@@ -24,6 +24,7 @@ async def read(request, id):
                 'attributes': {
                     'title': doc.title,
                     'content': doc.content,
+                    'topics': list(map(lambda topic: topic.name, doc.topics)),
                     'created_at': str(doc.created_at),
                     'updated_at': str(doc.updated_at)
                 }

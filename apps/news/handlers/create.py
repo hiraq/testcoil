@@ -7,12 +7,16 @@ from apps.news.models import News
 from apps.news.repository import NewsRepo
 from apps.news.services import CreateService
 
+from apps.topics.models import Topic
+from apps.topics.repository import TopicRepo
+
 async def create(request):
     response = {}
     status = HTTPStatus.CREATED
 
     repo = NewsRepo(News)
-    service = CreateService(request.json, repo)
+    topicRepo = TopicRepo(Topic)
+    service = CreateService(request.json, repo, topicRepo)
 
     try:
         news = service.call()
@@ -22,7 +26,8 @@ async def create(request):
                 'type': 'news',
                 'attributes': {
                     'title': news.title,
-                    'content': news.content
+                    'content': news.content,
+                    'topics': list(map(lambda topic: topic.name, news.topics))
                 }
             }
         }
