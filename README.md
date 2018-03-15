@@ -35,12 +35,6 @@ Dependencies:
 - aiohttp: Async http client/server library (actually you should got this lib from sanic itself, i just need to make sure about it)
 - Fabric3: Manage automated tasks
 
-```
-The purpose of this project not to adding new functionalities to Sanic, but just 
-to provide a simple skeleton, so you can start working on your new project quickly,
-and of course using Sanic as your main framework.
-```
-
 ---
 
 ## Getting Started
