@@ -69,6 +69,20 @@ Read more about command line options:
 python main.py -h
 ```
 
+Dockerized:
+
+build:
+
+```
+docker build -t testcoil:0.1 .
+```
+
+run:
+
+```
+docker run --name testcoil -e MONGO_HOST=<mongo_host> -p 8080:8080 -d testcoil:0.1
+```
+
 ---
 
 ## Structures
